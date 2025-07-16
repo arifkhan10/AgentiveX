@@ -1,0 +1,12 @@
+{
+  "dependencies": [
+    "."
+  ],
+  "graphs": {
+    "multi_agent_supervisor": "./oap_supervisor/agent.py:graph"
+  },
+  "env": ".env",
+  "auth": {
+    "path": "./oap_supervisor/security/auth.py:auth"
+  }
+}
