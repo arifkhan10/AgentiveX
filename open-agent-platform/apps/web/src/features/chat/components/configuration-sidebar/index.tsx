@@ -432,7 +432,8 @@ export const ConfigurationSidebar = forwardRef<
                   value="rag"
                   className="m-0 overflow-y-auto p-4"
                 >
-                  <ConfigSection title="Agent RAG">
+                  <ConfigSection title="Agent RAG"> 
+                  
                     {agentId && (
                       <ConfigFieldRAG
                         id={ragConfigurations[0].label}

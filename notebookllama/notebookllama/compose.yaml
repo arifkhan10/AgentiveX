@@ -19,6 +19,7 @@ services:
       POSTGRES_DB: $pgql_db
       POSTGRES_USER: $pgql_user
       POSTGRES_PASSWORD: $pgql_psw
+    command: postgres -c listen_addresses='*'
     volumes:
       - pgdata:/var/lib/postgresql/data
 

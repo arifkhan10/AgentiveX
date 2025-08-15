@@ -239,3 +239,161 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
     );
   }
 }
+
+
+
+
+
+
+
+// import { NextRequest, NextResponse } from "next/server";
+// import { createServerClient } from "@supabase/ssr";
+
+// const MCP_SERVER_URL = process.env.NEXT_PUBLIC_MCP_SERVER_URL;
+// const MCP_AUTH_REQUIRED = process.env.NEXT_PUBLIC_MCP_AUTH_REQUIRED === "true";
+
+// async function getSupabaseToken(req: NextRequest) {
+//   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+//   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+//   if (!supabaseUrl || !supabaseKey) return null;
+
+//   try {
+//     const supabase = createServerClient(supabaseUrl, supabaseKey, {
+//       cookies: {
+//         get(name: string) {
+//           return req.cookies.get(name)?.value;
+//         },
+//         set() {},
+//         remove() {},
+//       },
+//     });
+
+//     const { data: { session } } = await supabase.auth.getSession();
+//     return session?.access_token || null;
+//   } catch (err) {
+//     console.error("Error getting Supabase token:", err);
+//     return null;
+//   }
+// }
+
+// async function getMcpAccessToken(supabaseToken: string, mcpServerUrl: URL) {
+//   const mcpUrl = `${mcpServerUrl.href}/mcp`;
+//   const mcpOauthUrl = `${mcpServerUrl.href}/oauth/token`;
+
+//   try {
+//     const formData = new URLSearchParams({
+//       client_id: "mcp_default",
+//       subject_token: supabaseToken,
+//       grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
+//       resource: mcpUrl,
+//       subject_token_type: "urn:ietf:params:oauth:token-type:access_token",
+//     });
+
+//     const res = await fetch(mcpOauthUrl, {
+//       method: "POST",
+//       headers: { "Content-Type": "application/x-www-form-urlencoded" },
+//       body: formData.toString(),
+//     });
+
+//     if (res.ok) {
+//       const data = await res.json();
+//       return data.access_token;
+//     } else {
+//       console.error("Token exchange failed:", await res.text());
+//     }
+//   } catch (e) {
+//     console.error("Error during token exchange:", e);
+//   }
+
+//   return null;
+// }
+
+// export async function proxyRequest(req: NextRequest): Promise<Response> {
+//   if (!MCP_SERVER_URL) {
+//     return new Response(
+//       JSON.stringify({ message: "MCP_SERVER_URL is not set." }),
+//       { status: 500, headers: { "Content-Type": "application/json" } }
+//     );
+//   }
+
+//   const url = new URL(req.url);
+//   const path = url.pathname.replace(/^\/api\/oap_mcp/, "");
+//   const targetUrlObj = new URL(MCP_SERVER_URL);
+//   targetUrlObj.pathname = `${targetUrlObj.pathname.replace(/\/$/, "")}/mcp${path}${url.search}`;
+//   const targetUrl = targetUrlObj.toString();
+
+//   const headers = new Headers();
+//   req.headers.forEach((value, key) => {
+//     if (key.toLowerCase() !== "host") headers.set(key, value);
+//   });
+
+//   let accessToken: string | null = null;
+
+//   if (MCP_AUTH_REQUIRED) {
+//     const supabaseToken = await getSupabaseToken(req);
+//     if (!supabaseToken) {
+//       return new Response(
+//         JSON.stringify({ message: "No Supabase session found." }),
+//         { status: 401, headers: { "Content-Type": "application/json" } }
+//       );
+//     }
+
+//     accessToken = await getMcpAccessToken(supabaseToken, new URL(MCP_SERVER_URL));
+//     if (!accessToken) {
+//       return new Response(
+//         JSON.stringify({ message: "Failed to exchange Supabase token." }),
+//         { status: 401, headers: { "Content-Type": "application/json" } }
+//       );
+//     }
+
+//     headers.set("Authorization", `Bearer ${accessToken}`);
+//   }
+
+//   headers.set("Accept", "application/json, text/event-stream");
+
+//   let body: BodyInit | null | undefined = undefined;
+//   if (req.method !== "GET" && req.method !== "HEAD") {
+//     body = req.body;
+//   }
+
+//   try {
+//     const response = await fetch(targetUrl, {
+//       method: req.method,
+//       headers,
+//       body,
+//     });
+
+//     const responseClone = response.clone();
+//     let newResponse: NextResponse;
+
+//     try {
+//       const json = await responseClone.json();
+//       newResponse = NextResponse.json(json, {
+//         status: response.status,
+//         statusText: response.statusText,
+//       });
+//     } catch {
+//       const text = await responseClone.text();
+//       newResponse = new NextResponse(text, {
+//         status: response.status,
+//         statusText: response.statusText,
+//       });
+//     }
+
+//     response.headers.forEach((value, key) => {
+//       newResponse.headers.set(key, value);
+//     });
+
+//     return newResponse;
+//   } catch (err) {
+//     console.error("Proxy error:", err);
+//     return new Response(
+//       JSON.stringify({ message: "Proxy failed", error: String(err) }),
+//       { status: 502, headers: { "Content-Type": "application/json" } }
+//     );
+//   }
+// }
+
+
+

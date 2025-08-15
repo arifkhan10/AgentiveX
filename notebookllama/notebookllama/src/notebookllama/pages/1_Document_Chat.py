@@ -25,9 +25,9 @@ def sync_chat(inpt: str):
 # Chat Interface
 st.set_page_config(page_title="NotebookLlaMa - Document Chat", page_icon="🗣")
 
-st.sidebar.header("Document Chat🗣")
-st.sidebar.info("To switch to the Home page, select it from above!🔺")
-st.markdown("---")
+# st.sidebar.header("Document Chat🗣")
+# st.sidebar.info("To switch to the Home page, select it from above!🔺")
+# st.markdown("---")
 st.markdown("## NotebookLlaMa - Document Chat🗣")
 
 # Initialize chat history

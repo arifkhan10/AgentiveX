@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Wrench, Bot, MessageCircle, Brain, Gauge, Store} from "lucide-react";
+import { Wrench, Bot, MessageCircle, Brain, Gauge, Store, Network} from "lucide-react";
 
 import { NavMain } from "./nav-main";
 import { NavUser } from "./nav-user";
@@ -42,6 +42,16 @@ const data = {
       url: "/rag",
       icon: Brain,
     },
+    {
+      title: "LLMs",
+      url: "/LLMs",
+      icon: Network,
+    },
+    {
+  title: "Agentman",
+  url: "/agentman",
+  icon: Bot, 
+   },
     {
       title: "Agent Marketplace",
       url: "",

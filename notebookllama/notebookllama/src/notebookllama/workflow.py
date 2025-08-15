@@ -7,6 +7,7 @@ from llama_index.tools.mcp import BasicMCPClient
 from typing import Annotated, List, Union
 
 MCP_CLIENT = BasicMCPClient(command_or_url="http://localhost:8000/mcp", timeout=120)
+# MCP_CLIENT = BasicMCPClient(command_or_url="http://agentivex.duckdns.org/mcp", timeout=120)
 
 
 class FileInputEvent(StartEvent):

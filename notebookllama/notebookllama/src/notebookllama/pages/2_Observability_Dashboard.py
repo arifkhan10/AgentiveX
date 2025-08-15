@@ -13,8 +13,14 @@ from sqlalchemy import text
 
 load_dotenv()
 
+# sql_engine = OtelTracesSqlEngine(
+#     engine_url=f"postgresql+psycopg2://{os.getenv('pgql_user')}:{os.getenv('pgql_psw')}@localhost:5432/{os.getenv('pgql_db')}",
+#     table_name="agent_traces",
+#     service_name="agent.traces",
+# )
+
 sql_engine = OtelTracesSqlEngine(
-    engine_url=f"postgresql+psycopg2://{os.getenv('pgql_user')}:{os.getenv('pgql_psw')}@localhost:5432/{os.getenv('pgql_db')}",
+    engine_url=f"postgresql+psycopg2://{os.getenv('pgql_user')}:{os.getenv('pgql_psw')}@{os.getenv('pgql_host')}:{os.getenv('pgql_port')}/{os.getenv('pgql_db')}",
     table_name="agent_traces",
     service_name="agent.traces",
 )
@@ -113,11 +119,11 @@ def create_status_pie_chart(df: pd.DataFrame):
 
 
 # Streamlit UI
-st.set_page_config(page_title="NotebookLlaMa - Observability Dashboard", page_icon="🔍")
+# st.set_page_config(page_title="NotebookLlaMa - Observability Dashboard", page_icon="🔍")
 
-st.sidebar.header("Observability Dashboard🔍")
-st.sidebar.info("To switch to the other pages, select them from above!🔺")
-st.markdown("---")
+# st.sidebar.header("Observability Dashboard🔍")
+# st.sidebar.info("To switch to the other pages, select them from above!🔺")
+# st.markdown("---")
 st.markdown("## NotebookLlaMa - Observability Dashboard🔍")
 
 # Get the data

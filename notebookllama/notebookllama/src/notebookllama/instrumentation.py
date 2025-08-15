@@ -143,3 +143,6 @@ class OtelTracesSqlEngine:
         if not self._connection:
             raise ValueError("Engine was never connected!")
         self._engine.dispose(close=True)
+
+
+

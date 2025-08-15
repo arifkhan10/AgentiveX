@@ -426,7 +426,7 @@ export function Thread() {
                 <div className="flex items-center gap-3">
                   <LangGraphLogoSVG className="h-8 flex-shrink-0" />
                   <h1 className="text-2xl font-semibold tracking-tight">
-                    Open Agent Platform
+                    AgentiveX
                   </h1>
                 </div>
               )}

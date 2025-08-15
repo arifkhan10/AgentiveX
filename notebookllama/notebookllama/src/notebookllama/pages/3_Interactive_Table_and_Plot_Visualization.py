@@ -46,9 +46,9 @@ def get_plots_and_tables_sync(file: io.BytesIO):
 # Chat Interface
 st.set_page_config(page_title="NotebookLlaMa - Images and Tables", page_icon="📊")
 
-st.sidebar.header("Images and Tables📊")
-st.sidebar.info("To switch to the Home page, select it from above!🔺")
-st.markdown("---")
+# st.sidebar.header("Images and Tables📊")
+# st.sidebar.info("To switch to the Home page, select it from above!🔺")
+# st.markdown("---")
 st.markdown("## NotebookLlaMa - Images and Tables📊")
 st.markdown("### Upload a PDF file to extract plots and tables")
 

@@ -1,9 +1,10 @@
 from utils import get_mind_map, process_file, query_index
+# from notebookllama.utils import get_mind_map, process_file, query_index
+
 from fastmcp import FastMCP
 from typing import List, Union, Literal
 
 mcp: FastMCP = FastMCP(name="MCP For NotebookLM")
-
 
 @mcp.tool(
     name="process_file_tool",

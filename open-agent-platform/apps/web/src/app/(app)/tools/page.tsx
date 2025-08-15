@@ -123,7 +123,7 @@ export default function ToolsPage(): React.ReactNode {
               </p>
             </div>
 
-            <div
+            {/* <div
               className="border rounded-lg p-4 hover:bg-gray-100 cursor-pointer transition"
               onClick={() => setSource("langserve")}
             >
@@ -131,7 +131,7 @@ export default function ToolsPage(): React.ReactNode {
               <p className="text-sm text-muted-foreground">
                 Try and run LangServe tools in an interactive playground.
               </p>
-            </div>
+            </div> */}
 
             <div
               className="border rounded-lg p-4 hover:bg-gray-100 cursor-pointer transition"
@@ -160,7 +160,8 @@ export default function ToolsPage(): React.ReactNode {
         {source === "notellama" && (
           <div className="w-full h-[90vh] border rounded">
             <iframe
-              src="http://3.141.5.201:8501"
+              // src="http://3.141.5.201:8501"
+              src="http://agentivex.duckdns.org:8501"
               width="100%"
               height="100%"
               style={{ border: "none" }}
